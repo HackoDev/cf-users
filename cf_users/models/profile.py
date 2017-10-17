@@ -4,6 +4,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils import Choices
 
 from cf_core.models import BaseModerateModel
+from cf_core.managers import PROFILE_TYPE_CHOICES
 
 __all__ = [
     'Profile'
@@ -12,11 +13,7 @@ __all__ = [
 
 class Profile(BaseModerateModel):
 
-    TYPE_CHOICES = Choices(
-        ('REGULAR', "Пользователь системы"),
-        ('NCO', "Некомерческая организация"),
-        ('ORGANIZATION', "ООО/ОАО")
-    )
+    TYPE_CHOICES = PROFILE_TYPE_CHOICES
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
