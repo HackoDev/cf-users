@@ -5,7 +5,7 @@ from django.contrib import admin
 
 from cf_core.router import router
 
-from cf_users.api import PublishedProfileVewSet, UserProfileViewSet
+from cf_users.api.views import PublishedProfileVewSet, UserProfileViewSet
 
 router.register('profiles', PublishedProfileVewSet, base_name='profiles')
 router.register('published-profiles', UserProfileViewSet,

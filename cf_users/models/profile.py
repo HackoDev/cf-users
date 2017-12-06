@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
-from model_utils import Choices
 
 from cf_core.models import BaseModerateModel
 from cf_core.managers import PROFILE_TYPE_CHOICES
@@ -17,149 +16,118 @@ class Profile(BaseModerateModel):
 
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        verbose_name="пользователь",
+        verbose_name=_('user'),
         related_name='profile'
     )
 
     contact_phone = models.CharField(
-        verbose_name="контактный номер телефона",
+        verbose_name=_('contact phone number'),
         max_length=22,
         default='',
         blank=True
     )
 
     contact_email = models.EmailField(
-        verbose_name="контактный email",
+        verbose_name=_('contact email'),
         default='',
         blank=True
     )
 
     title = models.CharField(
-        verbose_name="название организации",
+        verbose_name=_('title'),
         max_length=512,
         default='',
         blank=True
     )
 
     base_type = models.CharField(
-        verbose_name="тип профиля",
+        verbose_name=_('type'),
         default=TYPE_CHOICES.REGULAR,
         choices=TYPE_CHOICES,
         max_length=32
     )
 
     ref_points = models.IntegerField(
-        verbose_name="баллы реферальной системы",
+        verbose_name=_('referral points'),
         default=0,
-        help_text="баллы заработаные пользователем по реферальной системе"
+        help_text=_('approve referral point')
     )
 
-    avatar = ThumbnailerImageField("логотип", default='')
-    notes = models.TextField("о себе", default='', blank=True)
-    web_link = models.URLField("сайт", default="", blank=True)
+    avatar = ThumbnailerImageField(verbose_name=_('avatar'), default='')
+    notes = models.TextField(verbose_name=_('notes'), default='', blank=True)
+    web_link = models.URLField(verbose_name=_('site url'), default="", blank=True)
 
     company_name = models.CharField(
-        "название компании",
+        verbose_name=_('company name'),
         max_length=1048,
         default='',
         blank=True
     )
 
-    legal_address = models.TextField("юридический адрес", blank=True,
+    legal_address = models.TextField(verbose_name=_('legal person'), blank=True,
                                      default='')
 
-    postal_address = models.TextField("почтовый адрес", default='', blank=True)
+    postal_address = models.TextField(verbose_name=_('postal address'),
+                                      default='', blank=True)
 
     tin = models.CharField(
-        "идентификационный номер налогоплательщика",
+        verbose_name=_('taxpayer identification number'),
         max_length=32,
         default='',
         blank=True
     )
 
     rrc = models.CharField(
-        "код причины регистрации",
+        verbose_name=_('reason code of registration'),
         max_length=512,
         default='',
         blank=True
     )
 
     rce = models.CharField(
-        "общероссийский классификатор предприятий и организаций",
+        verbose_name=_('All-Russian classifier of enterprises and organizations'),
         max_length=512,
         default='',
         blank=True,
     )
 
-    rcg = models.CharField(
-        "общероссийский классификатор органов государственной власти и "
-        "управления",
-        max_length=512,
-        default='',
-        blank=True
-    )
-
-    rco = models.CharField(
-        "общероссийский классификатор объектов "
-        "административно-территориального деления",
-        max_length=512,
-        default='',
-        blank=True
-    )
-
-    okved = models.CharField(
-        "ОКВЭД",
-        max_length=512,
-        default='',
-        blank=True
-    )
-
-    rcf = models.CharField(
-        "общероссийский классификатор организационно-правовых форм",
-        max_length=512,
-        default='',
-        blank=True
-    )
-
-    lfb = models.CharField(
-        "организационно-правовые формы хозяйствующих субъектов",
-        max_length=512,
-        default='',
-        blank=True
-    )
-
     name_bank = models.CharField(
-        verbose_name="наименование банка",
+        verbose_name=_('bank'),
         max_length=2048,
         default='',
         blank=True
     )
 
     checking_account = models.CharField(
-        verbose_name="рассчетный счет",
+        verbose_name=_('checking account'),
         max_length=512,
         default='',
         blank=True
     )
 
     correspondent_account = models.CharField(
-        verbose_name="корреспондентский счет",
+        verbose_name=_('correspondent account'),
         max_length=512,
         default='',
         blank=True
     )
 
-    bic = models.CharField("БИК банка", max_length=512, default='', blank=True)
+    bic = models.CharField(
+        verbose_name=_('bic'),
+        max_length=512,
+        default='',
+        blank=True
+    )
 
     head_full_name = models.CharField(
-        "полное имя руководителя",
+        verbose_name=_('head full name'),
         max_length=1048,
         default='',
         blank=True
     )
 
     accountant_full_name = models.CharField(
-        "ФИО бухгалтера",
+        verbose_name=_('accountant full name'),
         max_length=1048,
         default='',
         blank=True
@@ -186,5 +154,5 @@ class Profile(BaseModerateModel):
             return self.avatar['preview'].url
 
     class Meta:
-        verbose_name = "профиль"
-        verbose_name_plural = "профили"
+        verbose_name = _('profile')
+        verbose_name_plural = _('profiles')

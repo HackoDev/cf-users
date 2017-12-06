@@ -6,12 +6,12 @@ from celery import shared_task
 @shared_task()
 def send_email_message(recipient, subject, html_content, text_content):
     """
-    Отправка email-сообщения.
+    Email sending.
     
-    :param recipient: list or str Список email адресов
-    :param subject: str Тема сообщения
-    :param html_content: str HTML тело
-    :param text_content: str Текстовое тело
+    :param recipient: list, str recipients
+    :param subject: str Subject
+    :param html_content: str HTML-body
+    :param text_content: str Text-body
     :return: 
     """
 

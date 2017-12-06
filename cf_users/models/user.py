@@ -57,12 +57,14 @@ class UserManager(BaseUserManager):
 
 
 class AbstractUser(AbstractBaseUser, PermissionsMixin):
-    first_name = models.CharField("имя", max_length=512, default='')
-    last_name = models.CharField("фамилия", max_length=512, default='')
-    middle_name = models.CharField("отчество", max_length=512,
+    first_name = models.CharField(verbose_name=_('first name'), max_length=512,
+                                  default='')
+    last_name = models.CharField(verbose_name=_('last name'), max_length=512,
+                                 default='')
+    middle_name = models.CharField(verbose_name=_('middle name'), max_length=512,
                                    default='')
-    email = models.EmailField("email", db_index=True, unique=True)
-    phone_number = PhoneNumberField("номер телефона", db_index=True)
+    email = models.EmailField(verbose_name=_('email'), db_index=True, unique=True)
+    phone_number = PhoneNumberField(verbose_name=_('phone number'), db_index=True)
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -141,7 +143,8 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
 
 
 class User(AbstractUser):
-    is_subscribed = models.BooleanField("согласие на подписку", default=False)
+    is_subscribed = models.BooleanField(verbose_name=_('subscribed'),
+                                        default=False)
 
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
@@ -151,7 +154,7 @@ class User(AbstractUser):
 
     def get_referral_link(self):
         """
-        Генерация реферальной ссылки пользователя.
+        Generate referral links.
         """
         return '{url}?{param_name}={user_id}'.format(
             url=reverse('dashboard:referral-user'),
@@ -160,8 +163,8 @@ class User(AbstractUser):
         )
 
     class Meta:
-        verbose_name = "пользователь"
-        verbose_name_plural = "пользователи"
+        verbose_name = _('user')
+        verbose_name_plural = _('users')
 
 
 post_save.connect(handle_after_create_user, sender=User)

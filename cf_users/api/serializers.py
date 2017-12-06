@@ -5,6 +5,7 @@ from cf_users.models import Profile, User
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     total_projects = serializers.IntegerField(
         source='get_total_project_counter',
         read_only=True
@@ -52,6 +53,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+
+    RELATED_SERIALIZER_FIELDS = ('first_name', 'last_name', 'middle_name')
+
     user = UserSerializer(required=False)
     first_name = serializers.CharField(write_only=True, required=False)
     last_name = serializers.CharField(write_only=True, required=False)
@@ -63,8 +67,9 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
+        # update user object
         user_data = validated_data.pop('user', {})
-        for field in ['first_name', 'last_name', 'middle_name']:
+        for field in UserSerializer.RELATED_SERIALIZER_FIELDS:
             if field in validated_data:
                 user_data.update({field: validated_data.get(field)})
         for field, value in user_data.items():

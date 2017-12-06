@@ -43,7 +43,7 @@ class ProfileAdmin(BaseModerationModelAdmin):
         if obj.avatar:
             return '<img src="{path}"/>'.format(path=obj.get_avatar_preview())
         return '-'
-    get_avatar_preview.short_description = "Аватарка"
+    get_avatar_preview.short_description = _('avatar')
     get_avatar_preview.allow_tags = True
 
     def get_full_name(self, obj):
@@ -54,10 +54,10 @@ class ProfileAdmin(BaseModerationModelAdmin):
 
     def get_is_available(self, obj):
         if obj.base_type == Profile.TYPE_CHOICES.REGULAR:
-            return "Не требует модерации"
+            return _('regular user')
         return obj.get_is_available_display()
 
-    get_is_available.short_description = "Статус модерации"
+    get_is_available.short_description = _('moderation status')
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(ProfileAdmin, self).get_form(request, obj=None, **kwargs)
