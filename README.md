@@ -1,9 +1,7 @@
-Приложение для проекта CrowdFunding.
+Application for CrowdFunding project.
 
-Основные компонены:
-1. пользователи системы и их профили
-2. rest-api в рамках модуля
+Base components:
+1. users and profiles
+2. rest-api for models
 
-Не является конечной реализацией, разработан в рамках примера кода и 
-возможного дальнейшего развития пакеты.
-
+It's not finally code version, would be used as code example. 
