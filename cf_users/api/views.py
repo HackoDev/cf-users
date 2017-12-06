@@ -7,12 +7,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
-from cf_core.api import PageNumberPaginator
+from cf_core.api.views import PageNumberPaginator
 from .serializers import (
     ProfileSerializer, UserChangePasswordSerializer,
     ShareRegistrationSerializer, ProfileListSerializer
 )
-from ..models import Profile
+from cf_users.models import Profile
 
 
 class UserProfileViewSet(ModelViewSet):
