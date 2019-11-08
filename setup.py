@@ -23,7 +23,7 @@ setup(
     install_requires=[
         'Django==1.11.23',
         'celery==4.1.0',
-        'Pillow==6.2.0',
+        'Pillow==6.2.1',
         'django-model-utils==3.0.0',
         'django-phonenumber-field==1.3.0',
         'djangorestframework==3.9.1',
